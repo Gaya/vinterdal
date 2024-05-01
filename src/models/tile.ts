@@ -8,8 +8,15 @@ export interface Tile {
   edges: [TileEdge, TileEdge, TileEdge, TileEdge];
 }
 
+export enum TileOrientation {
+  UP = 0,
+  RIGHT = 1,
+  DOWN = 2,
+  LEFT = 3,
+}
+
 export interface BoardTile {
-  orientation: 0| 1 | 2 | 3;
+  orientation: TileOrientation;
   tile: Tile;
 }
 
@@ -18,4 +25,17 @@ export interface BoardNeighbours {
   e?: BoardTile;
   s?: BoardTile;
   w?: BoardTile;
+}
+
+export function createTile(edges: Tile['edges']): Tile {
+  return {
+    edges,
+  };
+}
+
+export function createBoardTile(tile: Tile, orientation: TileOrientation = TileOrientation.UP): BoardTile {
+  return {
+    orientation,
+    tile,
+  };
 }
