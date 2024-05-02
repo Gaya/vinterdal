@@ -2,7 +2,7 @@ import { BoardTile, getBoardTileEdge, TileOrientation } from './tile.ts';
 import { Player } from './player.ts';
 
 interface BoardPlacement {
-  claimed?: Player;
+  claimedBy?: Player;
   tile: BoardTile;
 }
 
