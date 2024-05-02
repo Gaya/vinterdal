@@ -1,4 +1,4 @@
-import { BoardTile, getBoardTileEdge, offsetByOrientation, TileOrientation } from './tile.ts';
+import { BoardTile, getBoardTileEdge, TileOrientation } from './tile.ts';
 import { Player } from './player.ts';
 
 interface BoardPlacement {
@@ -10,27 +10,65 @@ type BoardPosition = [number, number];
 
 export type Board = Record<string, BoardPlacement>;
 
-export function getTileFromBoard(
+export function getTilePlacementFromBoard(
   board: Board,
   position: BoardPosition,
 ): BoardPlacement | undefined {
   return board[position.join(':')];
 }
 
+function oppositeOrientation(orientation: TileOrientation): TileOrientation {
+  switch (orientation) {
+    case TileOrientation.RIGHT:
+      return TileOrientation.LEFT;
+    case TileOrientation.DOWN:
+      return TileOrientation.UP;
+    case TileOrientation.LEFT:
+      return TileOrientation.RIGHT;
+    default:
+    case TileOrientation.UP:
+      return TileOrientation.DOWN;
+  }
+}
+
 export function canConnectTiles(tileA: BoardTile, tileB: BoardTile, tileEdge: TileOrientation) {
-  const oppositeEdge = (offsetByOrientation(tileEdge) + 2) % 4;
   const edgeA = getBoardTileEdge(tileA, tileEdge);
-  const edgeB = getBoardTileEdge(tileB, oppositeEdge);
+  const edgeB = getBoardTileEdge(tileB, oppositeOrientation(tileEdge));
 
   return edgeA === edgeB;
 }
 
+function getPositionOffset(orientation: TileOrientation): [number, number] {
+  switch (orientation) {
+    case TileOrientation.RIGHT:
+      return [1, 0];
+    case TileOrientation.DOWN:
+      return [-1, 0];
+    case TileOrientation.LEFT:
+      return [0, -1];
+    default:
+    case TileOrientation.UP:
+      return [0, 1];
+  }
+}
+
 export function canPlaceTile(board: Board, tile: BoardTile, position: BoardPosition): boolean {
-  if (getTileFromBoard(board, position)) {
+  if (getTilePlacementFromBoard(board, position)) {
     return false;
   }
 
-  return false;
+  return [TileOrientation.UP, TileOrientation.RIGHT, TileOrientation.DOWN, TileOrientation.LEFT]
+    .every((orientation) => {
+      const [x, y] = position;
+      const [dx, dy] = getPositionOffset(orientation);
+      const comparingTilePlacement = getTilePlacementFromBoard(board, [x + dx, y + dy]);
+
+      if (comparingTilePlacement) {
+        return canConnectTiles(tile, comparingTilePlacement.tile, orientation);
+      }
+
+      return true;
+    });
 }
 
 export function placeTile(currentBoard: Board, tile: BoardTile, position: BoardPosition): Board {

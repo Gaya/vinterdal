@@ -1,7 +1,7 @@
 export enum TileEdge {
-  CITY = 1,
-  ROAD = 2,
-  FIELD = 3,
+  CITY = 'CITY',
+  ROAD = 'ROAD',
+  FIELD = 'FIELD',
 }
 
 export interface Tile {
@@ -11,10 +11,10 @@ export interface Tile {
 }
 
 export enum TileOrientation {
-  UP = 0,
-  RIGHT = 1,
-  DOWN = 2,
-  LEFT = 3,
+  UP = 'UP',
+  RIGHT = 'RIGHT',
+  DOWN = 'DOWN',
+  LEFT = 'LEFT',
 }
 
 export interface BoardTile {
