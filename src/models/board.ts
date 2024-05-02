@@ -71,12 +71,18 @@ export function canPlaceTile(board: Board, tile: BoardTile, position: BoardPosit
     });
 }
 
-export function placeTile(currentBoard: Board, tile: BoardTile, position: BoardPosition): Board {
+export function placeTile(
+  currentBoard: Board,
+  tile: BoardTile,
+  position: BoardPosition,
+  claimedBy?: Player,
+): Board {
   if (!canPlaceTile(currentBoard, tile, position)) {
     throw new Error('Tile cannot be placed.');
   }
 
-  const newBoard = { ...currentBoard };
-
-  return newBoard;
+  return {
+    ...currentBoard,
+    [position.join(':')]: { tile, claimedBy },
+  };
 }

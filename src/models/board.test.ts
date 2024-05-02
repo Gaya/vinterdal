@@ -1,4 +1,10 @@
-import { Board, canConnectTiles, canPlaceTile, getTilePlacementFromBoard } from './board.ts';
+import {
+  Board,
+  canConnectTiles,
+  canPlaceTile,
+  getTilePlacementFromBoard,
+  placeTile,
+} from './board.ts';
 import { createBoardTile, createTile, TileEdge, TileOrientation } from './tile.ts';
 
 const startingTile = createBoardTile(
@@ -132,5 +138,42 @@ describe('canPlaceTile', () => {
     );
 
     expect(canPlaceTile(complexBoard, turnedTile, [0, -1])).toEqual(true);
+  });
+});
+
+describe('placeTile', () => {
+  it('should be able to place a new tile on the board', () => {
+    const turnedTile = createBoardTile(
+      createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
+      TileOrientation.LEFT,
+    );
+
+    expect(placeTile(standardBoard, turnedTile, [1, 0]))
+      .toEqual({
+        ['0:0']: { tile: startingTile },
+        ['1:0']: { tile: turnedTile },
+      });
+  });
+
+  it('should not be able to place a new tile an existing tile', () => {
+    const turnedTile = createBoardTile(
+      createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
+      TileOrientation.LEFT,
+    );
+
+    expect(() => {
+      placeTile(standardBoard, turnedTile, [0, 0]);
+    }).toThrow(Error);
+  });
+
+  it('should not be able to place impossible connection', () => {
+    const turnedTile = createBoardTile(
+      createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.FIELD]),
+      TileOrientation.LEFT,
+    );
+
+    expect(() => {
+      placeTile(standardBoard, turnedTile, [0, 1]);
+    }).toThrow(Error);
   });
 });
