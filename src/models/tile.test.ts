@@ -62,35 +62,35 @@ describe('getBoardTileEdge', () => {
     const boardTile = createBoardTile(startingTile);
 
     expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.CITY);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.FIELD);
     expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
   });
 
   it('should give back correct edges when turned right', () => {
     const boardTile = createBoardTile(startingTile, TileOrientation.RIGHT);
 
     expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.CITY);
     expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.FIELD);
   });
 
   it('should give back correct edges when turned down', () => {
     const boardTile = createBoardTile(startingTile, TileOrientation.DOWN);
 
     expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.FIELD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.CITY);
     expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
   });
 
   it('should give back correct edges when turned left', () => {
     const boardTile = createBoardTile(startingTile, TileOrientation.LEFT);
 
     expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.FIELD);
     expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.CITY);
   });
 });

@@ -67,6 +67,7 @@ export function offsetByOrientation(orientation: TileOrientation) {
 export function getBoardTileEdge(tile: BoardTile, tileSide: TileOrientation): TileEdge {
   const tileOffset = offsetByOrientation(tileSide);
   const orientationOffset = offsetByOrientation(tile.orientation);
+  const index = tileOffset - orientationOffset;
 
-  return tile.tile.edges[(tileOffset + orientationOffset) % 4];
+  return tile.tile.edges[index < 0 ? 4 + index : index];
 }

@@ -43,9 +43,9 @@ function getPositionOffset(orientation: TileOrientation): [number, number] {
     case TileOrientation.RIGHT:
       return [1, 0];
     case TileOrientation.DOWN:
-      return [-1, 0];
-    case TileOrientation.LEFT:
       return [0, -1];
+    case TileOrientation.LEFT:
+      return [-1, 0];
     default:
     case TileOrientation.UP:
       return [0, 1];
