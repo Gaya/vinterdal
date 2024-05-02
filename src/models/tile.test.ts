@@ -1,4 +1,4 @@
-import { createBoardTile, createTile, TileEdge, TileOrientation } from '~models/tile.ts';
+import { createBoardTile, createTile, TileEdge, TileOrientation } from './tile.ts';
 
 describe('createTile', () => {
   it('creates a new city filled tile', () => {
@@ -10,11 +10,21 @@ describe('createTile', () => {
 });
 
 describe('createBoardTile', () => {
+  const cityTile = createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY]);
+
   it('creates a new city filled tile', () => {
-    expect(createBoardTile(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY])))
+    expect(createBoardTile(cityTile))
       .toEqual({
         orientation: TileOrientation.UP,
-        tile: createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY]),
+        tile: cityTile,
+      });
+  });
+
+  it('creates a new city filled tile with orientation', () => {
+    expect(createBoardTile(cityTile, TileOrientation.DOWN))
+      .toEqual({
+        orientation: TileOrientation.DOWN,
+        tile: cityTile,
       });
   });
 });
