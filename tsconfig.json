@@ -21,7 +21,8 @@
 
     "paths": {
       "~models/*": ["./src/models/*"],
-      "~rules/*": ["./src/rules/*"],
+      "~parts/*": ["./src/parts/*"],
+      "~view/*": ["./src/view/*"],
     }
   },
   "include": ["src"]
