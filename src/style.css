@@ -1,3 +1,7 @@
+#app {
+  display: flex;
+}
+
 svg {
   display: block;
   width: 200px;
