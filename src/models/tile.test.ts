@@ -3,6 +3,7 @@ import {
   createTile,
   getBoardTileEdge,
   TileEdge,
+  TileMiddle,
   TileOrientation,
 } from './tile.ts';
 
@@ -11,26 +12,26 @@ describe('createTile', () => {
     expect(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY]))
       .toEqual({
         edges: [TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY],
+        middle: TileMiddle.FIELD,
         hasBonus: false,
-        hasCloister: false,
       });
   });
 
   it('creates a new city filled tile with bonus', () => {
-    expect(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY], { bonus: true }))
+    expect(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY], TileMiddle.FIELD, { bonus: true }))
       .toEqual({
         edges: [TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY],
+        middle: TileMiddle.FIELD,
         hasBonus: true,
-        hasCloister: false,
       });
   });
 
   it('creates a field tile with a cloister', () => {
-    expect(createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD], { cloister: true }))
+    expect(createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD], TileMiddle.CLOISTER))
       .toEqual({
         edges: [TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD],
+        middle: TileMiddle.CLOISTER,
         hasBonus: false,
-        hasCloister: true,
       });
   });
 });

@@ -4,8 +4,16 @@ export enum TileEdge {
   FIELD = 'FIELD',
 }
 
+export enum TileMiddle {
+  CITY = 'CITY',
+  CLOISTER = 'CLOISTER',
+  CATHEDRAL = 'CATHEDRAL',
+  FIELD = 'FIELD',
+}
+
 export interface Tile {
   edges: [TileEdge, TileEdge, TileEdge, TileEdge];
+  middle: TileMiddle,
   hasBonus?: boolean;
   hasCloister?: boolean;
 }
@@ -31,12 +39,13 @@ export interface BoardNeighbours {
 
 export function createTile(
   edges: Tile['edges'],
+  middle: TileMiddle = TileMiddle.FIELD,
   extraProperties: Partial<{ bonus: boolean; cloister: boolean; }> = {},
 ): Tile {
   return {
     edges,
+    middle,
     hasBonus: !!extraProperties.bonus,
-    hasCloister: !!extraProperties.cloister,
   };
 }
 
@@ -70,4 +79,11 @@ export function getBoardTileEdge(tile: BoardTile, tileSide: TileOrientation): Ti
   const index = tileOffset - orientationOffset;
 
   return tile.tile.edges[index < 0 ? 4 + index : index];
+}
+
+export function createTiles(
+  tile: Tile,
+  amount: number,
+): Tile[] {
+  return Array(amount).fill(tile);
 }
