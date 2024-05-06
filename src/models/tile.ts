@@ -6,8 +6,7 @@ export enum TileEdge {
 
 export enum TileMiddle {
   CITY = 'CITY',
-  CLOISTER = 'CLOISTER',
-  CATHEDRAL = 'CATHEDRAL',
+  FARM = 'FARM',
   FIELD = 'FIELD',
 }
 
@@ -28,13 +27,6 @@ export enum TileOrientation {
 export interface BoardTile {
   orientation: TileOrientation;
   tile: Tile;
-}
-
-export interface BoardNeighbours {
-  n?: BoardTile;
-  e?: BoardTile;
-  s?: BoardTile;
-  w?: BoardTile;
 }
 
 export function createTile(

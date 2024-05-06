@@ -1,13 +1,13 @@
 import { createTile, createTiles, TileEdge, TileMiddle } from '~models/tile.ts';
 
-export const ffffCloister = createTile(
+export const ffffFarm = createTile(
   [TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD],
-  TileMiddle.CLOISTER,
+  TileMiddle.FARM,
 );
 
-export const ffrfCloister = createTile(
+export const ffrfFarm = createTile(
   [TileEdge.FIELD, TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD],
-  TileMiddle.CLOISTER,
+  TileMiddle.FARM,
 );
 
 export const ccccCityBonus = createTile(
@@ -118,8 +118,8 @@ export const rrrr = createTile(
 );
 
 export default [
-  ...createTiles(ffffCloister, 4),
-  ...createTiles(ffrfCloister, 2),
+  ...createTiles(ffffFarm, 4),
+  ...createTiles(ffrfFarm, 2),
   ccccCityBonus,
   ...createTiles(ccfcCity, 3),
   ccfcCityBonus,

@@ -26,11 +26,11 @@ describe('createTile', () => {
       });
   });
 
-  it('creates a field tile with a cloister', () => {
-    expect(createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD], TileMiddle.CLOISTER))
+  it('creates a field tile with a farm', () => {
+    expect(createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD], TileMiddle.FARM))
       .toEqual({
         edges: [TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD],
-        middle: TileMiddle.CLOISTER,
+        middle: TileMiddle.FARM,
         hasBonus: false,
       });
   });
