@@ -1,8 +1,9 @@
-import { BoardTile, getBoardTileEdge, TileOrientation } from './tile.ts';
+import { BoardTile, getBoardTileEdge, TileEdge, TileOrientation } from './tile.ts';
 import { Player } from './player.ts';
 
 interface BoardTileClaim {
   player: Player;
+  type: TileEdge;
   orientation: TileOrientation;
 }
 

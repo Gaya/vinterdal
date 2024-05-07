@@ -23,16 +23,28 @@ svg {
 .board .tile {
   width: var(--tile-size);
   height: var(--tile-size);
+  position: relative;
 }
 
-.board .tile.RIGHT {
+.board .tile .claim {
+  position: absolute;
+  z-index: 2;
+  width: calc(var(--tile-size) * (1/2));
+}
+
+.board .tile-image {
+  position: absolute;
+  z-index: 1;
+}
+
+.board .tile.RIGHT .tile-image {
   rotate: 90deg;
 }
 
-.board .tile.DOWN {
+.board .tile.DOWN .tile-image {
   rotate: 180deg;
 }
 
-.board .tile.LEFT {
+.board .tile.LEFT .tile-image {
   rotate: 270deg;
 }
