@@ -1,4 +1,17 @@
-import { ffrr, frfr, frrr, rrrr } from '~parts/tiles/base.ts';
+import {
+  ccccCityBonus,
+  ccrcCity,
+  cfcf,
+  cffc,
+  cffcCity,
+  cfrr,
+  crfr,
+  fcfcCity,
+  ffrr,
+  frfr,
+  frrr,
+  rrrr,
+} from '~parts/tiles/base.ts';
 
 import './style.css';
 
@@ -11,7 +24,7 @@ function start() {
     return;
   }
 
-  const tiles = [rrrr, frrr, ffrr, frfr];
+  const tiles = [rrrr, frrr, ffrr, frfr, crfr, cfcf, cffc, cfrr, cffcCity, ccrcCity, fcfcCity, ccccCityBonus];
 
   tiles.forEach((t) => {
     app.appendChild(tileImage(t));

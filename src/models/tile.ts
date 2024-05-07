@@ -14,7 +14,6 @@ export interface Tile {
   edges: [TileEdge, TileEdge, TileEdge, TileEdge];
   middle: TileMiddle,
   hasBonus?: boolean;
-  hasCloister?: boolean;
 }
 
 export enum TileOrientation {

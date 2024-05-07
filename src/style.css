@@ -1,9 +1,11 @@
 #app {
   display: flex;
+  flex-wrap: wrap;
+  width: 750px;
 }
 
 svg {
   display: block;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
