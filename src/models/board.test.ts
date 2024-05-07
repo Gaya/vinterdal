@@ -6,6 +6,7 @@ import {
   placeTile,
 } from './board.ts';
 import { createBoardTile, createTile, TileEdge, TileOrientation } from './tile.ts';
+import { createPlayer, PlayerColor } from '~models/player.ts';
 
 const startingTile = createBoardTile(
   createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
@@ -175,5 +176,20 @@ describe('placeTile', () => {
     expect(() => {
       placeTile(standardBoard, turnedTile, [0, 1]);
     }).toThrow(Error);
+  });
+
+  it('should be able to claim tile', () => {
+    const player = createPlayer({ color: PlayerColor.RED });
+    const claimed = { player, orientation: TileOrientation.UP };
+    const turnedTile = createBoardTile(
+      createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
+      TileOrientation.LEFT,
+    );
+
+    expect(placeTile(standardBoard, turnedTile, [1, 0], claimed))
+      .toEqual({
+        ['0:0']: { tile: startingTile },
+        ['1:0']: { tile: turnedTile, claimed },
+      });
   });
 });

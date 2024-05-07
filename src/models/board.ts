@@ -1,8 +1,13 @@
 import { BoardTile, getBoardTileEdge, TileOrientation } from './tile.ts';
 import { Player } from './player.ts';
 
+interface BoardTileClaim {
+  player: Player;
+  orientation: TileOrientation;
+}
+
 interface BoardPlacement {
-  claimedBy?: Player;
+  claimed?: BoardTileClaim;
   tile: BoardTile;
 }
 
@@ -75,7 +80,7 @@ export function placeTile(
   currentBoard: Board,
   tile: BoardTile,
   position: BoardPosition,
-  claimedBy?: Player,
+  claimed?: BoardTileClaim,
 ): Board {
   if (!canPlaceTile(currentBoard, tile, position)) {
     throw new Error('Tile cannot be placed.');
@@ -83,6 +88,6 @@ export function placeTile(
 
   return {
     ...currentBoard,
-    [position.join(':')]: { tile, claimedBy },
+    [position.join(':')]: { tile, claimed },
   };
 }

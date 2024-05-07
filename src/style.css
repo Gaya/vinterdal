@@ -1,3 +1,9 @@
+:root {
+  --tile-size: 150px;
+  --board-cols: 1;
+  --board-rows: 1;
+}
+
 #app {
   display: flex;
   flex-wrap: wrap;
@@ -6,6 +12,27 @@
 
 svg {
   display: block;
-  width: 150px;
-  height: 150px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(var(--board-cols), var(--tile-size));
+  grid-template-rows: repeat(var(--board-rows), var(--tile-size));
+}
+
+.board .tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+}
+
+.board .tile.RIGHT {
+  rotate: 90deg;
+}
+
+.board .tile.DOWN {
+  rotate: 180deg;
+}
+
+.board .tile.LEFT {
+  rotate: 270deg;
 }

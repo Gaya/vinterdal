@@ -1,21 +1,10 @@
-import {
-  ccccCityBonus,
-  ccrcCity,
-  cfcf,
-  cffc,
-  cffcCity,
-  cfrr,
-  crfr,
-  fcfcCity,
-  ffrr,
-  frfr,
-  frrr,
-  rrrr,
-} from '~parts/tiles/base.ts';
+import { ccrcCity, fcfcCity, startingTile } from '~parts/tiles/base.ts';
 
 import './style.css';
 
-import { tileImage } from './view/tile.ts';
+import { createBoardTile, TileOrientation } from '~models/tile.ts';
+import { Board } from '~models/board.ts';
+import { renderBoard } from '~view/board.ts';
 
 function start() {
   const app = document.getElementById('app');
@@ -24,11 +13,31 @@ function start() {
     return;
   }
 
-  const tiles = [rrrr, frrr, ffrr, frfr, crfr, cfcf, cffc, cfrr, cffcCity, ccrcCity, fcfcCity, ccccCityBonus];
+  const start = createBoardTile(
+    startingTile,
+    TileOrientation.DOWN,
+  );
 
-  tiles.forEach((t) => {
-    app.appendChild(tileImage(t));
-  });
+  const below = createBoardTile(fcfcCity, TileOrientation.LEFT);
+  const above = createBoardTile(fcfcCity);
+  const left = createBoardTile(ccrcCity, TileOrientation.LEFT);
+
+  const board: Board = {
+    ['0:0']: {
+      tile: start,
+    },
+    ['-1:0']: {
+      tile: left,
+    },
+    ['0:1']: {
+      tile: below,
+    },
+    ['0:-1']: {
+      tile: above,
+    },
+  };
+
+  app.appendChild(renderBoard(board));
 }
 
 start();
