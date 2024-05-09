@@ -17,7 +17,7 @@ import { createPlayer, PlayerColor } from '~models/player.ts';
 
 const startingTile = createBoardTile(
   createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-  TileOrientation.UP,
+  TileOrientation.N,
 );
 
 const standardBoard: Board = {
@@ -50,21 +50,21 @@ describe('canConnectTiles', () => {
   it('should be able to connect two road edges', () => {
     const startingTile = createBoardTile(
       createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.UP,
+      TileOrientation.N,
     );
 
-    expect(canConnectTiles(startingTile, startingTile, TileOrientation.LEFT)).toEqual(true);
-    expect(canConnectTiles(startingTile, startingTile, TileOrientation.RIGHT)).toEqual(true);
+    expect(canConnectTiles(startingTile, startingTile, TileOrientation.W)).toEqual(true);
+    expect(canConnectTiles(startingTile, startingTile, TileOrientation.E)).toEqual(true);
   });
 
   it('should not be able to connect city and field edges', () => {
     const startingTile = createBoardTile(
       createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.UP,
+      TileOrientation.N,
     );
 
-    expect(canConnectTiles(startingTile, startingTile, TileOrientation.UP)).toEqual(false);
-    expect(canConnectTiles(startingTile, startingTile, TileOrientation.DOWN)).toEqual(false);
+    expect(canConnectTiles(startingTile, startingTile, TileOrientation.N)).toEqual(false);
+    expect(canConnectTiles(startingTile, startingTile, TileOrientation.S)).toEqual(false);
   });
 });
 
@@ -72,7 +72,7 @@ describe('canPlaceTile', () => {
   it('should be able to place a field tile below the starting tile', () => {
     const fieldTile = createBoardTile(
       createTile([TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD]),
-      TileOrientation.UP,
+      TileOrientation.N,
     );
 
     expect(canPlaceTile(standardBoard, fieldTile, [0, -1])).toEqual(true);
@@ -81,7 +81,7 @@ describe('canPlaceTile', () => {
   it('should be able to place a field and road tile below the starting tile', () => {
     const fieldTile = createBoardTile(
       createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.UP,
+      TileOrientation.N,
     );
 
     expect(canPlaceTile(standardBoard, fieldTile, [0, -1])).toEqual(true);
@@ -90,7 +90,7 @@ describe('canPlaceTile', () => {
   it('should be able to place a turned starting tile below the starting tile', () => {
     const fieldTile = createBoardTile(
       createTile([TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD]),
-      TileOrientation.DOWN,
+      TileOrientation.S,
     );
 
     expect(canPlaceTile(standardBoard, fieldTile, [0, -1])).toEqual(true);
@@ -99,7 +99,7 @@ describe('canPlaceTile', () => {
   it('should not be able to place a turned field and road tile below the starting tile', () => {
     const fieldTile = createBoardTile(
       createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.RIGHT,
+      TileOrientation.E,
     );
 
     expect(canPlaceTile(standardBoard, fieldTile, [0, -1])).toEqual(false);
@@ -108,7 +108,7 @@ describe('canPlaceTile', () => {
   it('should not be able to place a tile on top of another', () => {
     const fieldTile = createBoardTile(
       createTile([TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.RIGHT,
+      TileOrientation.E,
     );
 
     expect(canPlaceTile(standardBoard, fieldTile, [0, 0])).toEqual(false);
@@ -117,12 +117,12 @@ describe('canPlaceTile', () => {
   it('should be to handle a complex situation', () => {
     const belowTile = createBoardTile(
       createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.RIGHT,
+      TileOrientation.E,
     );
 
     const rightTile = createBoardTile(
       createTile([TileEdge.CITY, TileEdge.ROAD, TileEdge.FIELD, TileEdge.ROAD]),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     const complexBoard: Board = {
@@ -142,7 +142,7 @@ describe('canPlaceTile', () => {
 
     const turnedTile = createBoardTile(
       createTile([TileEdge.ROAD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.CITY]),
-      TileOrientation.DOWN,
+      TileOrientation.S,
     );
 
     expect(canPlaceTile(complexBoard, turnedTile, [0, -1])).toEqual(true);
@@ -153,7 +153,7 @@ describe('placeTile', () => {
   it('should be able to place a new tile on the board', () => {
     const turnedTile = createBoardTile(
       createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     expect(placeTile(standardBoard, turnedTile, [1, 0]))
@@ -166,7 +166,7 @@ describe('placeTile', () => {
   it('should not be able to place a new tile an existing tile', () => {
     const turnedTile = createBoardTile(
       createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     expect(() => {
@@ -177,7 +177,7 @@ describe('placeTile', () => {
   it('should not be able to place impossible connection', () => {
     const turnedTile = createBoardTile(
       createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.FIELD]),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     expect(() => {
@@ -196,7 +196,7 @@ describe('placeTile', () => {
           [ClaimLocation.N]: ClaimType.ROAD,
         },
       ),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     expect(placeTile(standardBoard, turnedTile, [1, 0], claimed))
@@ -217,7 +217,7 @@ describe('placeTile', () => {
           [ClaimLocation.S]: ClaimType.ROAD,
         },
       ),
-      TileOrientation.LEFT,
+      TileOrientation.W,
     );
 
     expect(() => {

@@ -69,15 +69,15 @@ describe('createBoardTile', () => {
   it('creates a new city filled tile', () => {
     expect(createBoardTile(cityTile))
       .toEqual({
-        orientation: TileOrientation.UP,
+        orientation: TileOrientation.N,
         tile: cityTile,
       });
   });
 
   it('creates a new city filled tile with orientation', () => {
-    expect(createBoardTile(cityTile, TileOrientation.DOWN))
+    expect(createBoardTile(cityTile, TileOrientation.S))
       .toEqual({
-        orientation: TileOrientation.DOWN,
+        orientation: TileOrientation.S,
         tile: cityTile,
       });
   });
@@ -89,36 +89,36 @@ describe('getBoardTileEdge', () => {
   it('should give back the correct edges when getting them all', () => {
     const boardTile = createBoardTile(startingTile);
 
-    expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.CITY);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.FIELD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.N)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.E)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.S)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.W)).toEqual(TileEdge.ROAD);
   });
 
   it('should give back correct edges when turned right', () => {
-    const boardTile = createBoardTile(startingTile, TileOrientation.RIGHT);
+    const boardTile = createBoardTile(startingTile, TileOrientation.E);
 
-    expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.CITY);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.N)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.E)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.S)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.W)).toEqual(TileEdge.FIELD);
   });
 
   it('should give back correct edges when turned down', () => {
-    const boardTile = createBoardTile(startingTile, TileOrientation.DOWN);
+    const boardTile = createBoardTile(startingTile, TileOrientation.S);
 
-    expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.FIELD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.CITY);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.N)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.E)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.S)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.W)).toEqual(TileEdge.ROAD);
   });
 
   it('should give back correct edges when turned left', () => {
-    const boardTile = createBoardTile(startingTile, TileOrientation.LEFT);
+    const boardTile = createBoardTile(startingTile, TileOrientation.W);
 
-    expect(getBoardTileEdge(boardTile, TileOrientation.UP)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.RIGHT)).toEqual(TileEdge.FIELD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.DOWN)).toEqual(TileEdge.ROAD);
-    expect(getBoardTileEdge(boardTile, TileOrientation.LEFT)).toEqual(TileEdge.CITY);
+    expect(getBoardTileEdge(boardTile, TileOrientation.N)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.E)).toEqual(TileEdge.FIELD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.S)).toEqual(TileEdge.ROAD);
+    expect(getBoardTileEdge(boardTile, TileOrientation.W)).toEqual(TileEdge.CITY);
   });
 });

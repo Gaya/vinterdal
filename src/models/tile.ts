@@ -39,10 +39,10 @@ export interface Tile {
 }
 
 export enum TileOrientation {
-  UP = 'UP',
-  RIGHT = 'RIGHT',
-  DOWN = 'DOWN',
-  LEFT = 'LEFT',
+  N = 'N',
+  E = 'E',
+  S = 'S',
+  W = 'W',
 }
 
 export interface BoardTile {
@@ -68,7 +68,7 @@ export function createTile(
 
 export function createBoardTile(
   tile: Tile,
-  orientation: TileOrientation = TileOrientation.UP,
+  orientation: TileOrientation = TileOrientation.N,
 ): BoardTile {
   return {
     orientation,
@@ -78,14 +78,14 @@ export function createBoardTile(
 
 export function offsetByOrientation(orientation: TileOrientation) {
   switch (orientation) {
-    case TileOrientation.RIGHT:
+    case TileOrientation.E:
       return 1;
-    case TileOrientation.DOWN:
+    case TileOrientation.S:
       return 2;
-    case TileOrientation.LEFT:
+    case TileOrientation.W:
       return 3;
     default:
-    case TileOrientation.UP:
+    case TileOrientation.N:
       return 0;
   }
 }

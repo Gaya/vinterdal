@@ -24,15 +24,15 @@ export function getTilePlacementFromBoard(
 
 function oppositeOrientation(orientation: TileOrientation): TileOrientation {
   switch (orientation) {
-    case TileOrientation.RIGHT:
-      return TileOrientation.LEFT;
-    case TileOrientation.DOWN:
-      return TileOrientation.UP;
-    case TileOrientation.LEFT:
-      return TileOrientation.RIGHT;
+    case TileOrientation.E:
+      return TileOrientation.W;
+    case TileOrientation.S:
+      return TileOrientation.N;
+    case TileOrientation.W:
+      return TileOrientation.E;
     default:
-    case TileOrientation.UP:
-      return TileOrientation.DOWN;
+    case TileOrientation.N:
+      return TileOrientation.S;
   }
 }
 
@@ -45,14 +45,14 @@ export function canConnectTiles(tileA: BoardTile, tileB: BoardTile, tileEdge: Ti
 
 function getPositionOffset(orientation: TileOrientation): [number, number] {
   switch (orientation) {
-    case TileOrientation.RIGHT:
+    case TileOrientation.E:
       return [1, 0];
-    case TileOrientation.DOWN:
+    case TileOrientation.S:
       return [0, -1];
-    case TileOrientation.LEFT:
+    case TileOrientation.W:
       return [-1, 0];
     default:
-    case TileOrientation.UP:
+    case TileOrientation.N:
       return [0, 1];
   }
 }
@@ -62,7 +62,7 @@ export function canPlaceTile(board: Board, tile: BoardTile, position: BoardPosit
     return false;
   }
 
-  return [TileOrientation.UP, TileOrientation.RIGHT, TileOrientation.DOWN, TileOrientation.LEFT]
+  return [TileOrientation.N, TileOrientation.E, TileOrientation.S, TileOrientation.W]
     .every((orientation) => {
       const [x, y] = position;
       const [dx, dy] = getPositionOffset(orientation);

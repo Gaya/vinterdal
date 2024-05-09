@@ -19,12 +19,12 @@ function start() {
 
   const start = createBoardTile(
     startingTile,
-    TileOrientation.DOWN,
+    TileOrientation.S,
   );
 
-  const below = createBoardTile(fcfcCity, TileOrientation.LEFT);
+  const below = createBoardTile(fcfcCity, TileOrientation.W);
   const above = createBoardTile(fcfcCity);
-  const left = createBoardTile(ccrcCity, TileOrientation.LEFT);
+  const left = createBoardTile(ccrcCity, TileOrientation.W);
 
   const board: Board = {
     ['0:0']: {
