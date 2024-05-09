@@ -10,6 +10,65 @@
   width: 750px;
 }
 
+.tile-example {
+  width: 100px;
+  position: relative;
+  margin: 2px;
+}
+
+.tile-example .claim {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  background: purple;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.tile-example .claim.CITY {
+  background: red;
+}
+
+.tile-example .claim.ROAD {
+  background: blue;
+}
+
+.tile-example .claim.FIELD {
+  background: black;
+}
+
+.tile-example .claim.FARM {
+  background: deeppink;
+}
+
+.tile-example .claim.N,
+.tile-example .claim.NE,
+.tile-example .claim.NW {
+  top: 10%;
+}
+
+.tile-example .claim.NE,
+.tile-example .claim.E,
+.tile-example .claim.SE {
+  right: 10%;
+  left: auto;
+}
+
+.tile-example .claim.SE,
+.tile-example .claim.S,
+.tile-example .claim.SW {
+  top: 90%;
+}
+
+.tile-example .claim.NW,
+.tile-example .claim.W,
+.tile-example .claim.SW {
+  left: 10%;
+}
+
 svg {
   display: block;
 }
@@ -40,14 +99,14 @@ svg {
   z-index: 1;
 }
 
-.board .tile.RIGHT .tile-image {
+.board .tile.E .tile-image {
   rotate: 90deg;
 }
 
-.board .tile.DOWN .tile-image {
+.board .tile.S .tile-image {
   rotate: 180deg;
 }
 
-.board .tile.LEFT .tile-image {
+.board .tile.W .tile-image {
   rotate: 270deg;
 }

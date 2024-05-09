@@ -131,6 +131,8 @@ export function tileImage(tile: Tile) {
       tile.hasBonus ? make(
         'path',
         {
+          stroke: '#e38613',
+          'stroke-width': '1',
           fill: '#2146c4',
           d: 'M 18.203 8.459 C 18.203 8.459 17.599 8.459 17.462 8.459 C 15.439 8.459 13.676 7.686 12.279 6.281 C 10.884 7.686 9.12 8.459 7.098 8.459 C 6.962 8.459 6.357 8.459 6.357 8.459 C 6.357 8.459 6.357 9.909 6.357 10.755 C 6.357 14.885 8.875 18.355 12.279 19.34 C 15.687 18.355 18.203 14.885 18.203 10.755 C 18.203 9.909 18.203 8.459 18.203 8.459 Z'
         },
@@ -140,5 +142,25 @@ export function tileImage(tile: Tile) {
         make('path', { fill: '#2f1a04', d: "M 59.807 54.493 L 40.309 54.493 L 50.057 44.759 L 59.807 54.493 Z M 47.934 42.639 L 39.683 50.876 L 39.683 34.403 L 47.934 42.639 Z M 60.43 34.403 L 60.43 50.876 L 52.18 42.639 L 60.43 34.403 Z M 50.057 40.52 L 41.809 32.286 L 58.305 32.286 L 50.057 40.52 Z" }),
       ] : []),
     ]
+  );
+}
+
+export function tileExample(tile: Tile) {
+  make(
+    'div',
+    {
+      class: 'tile-example',
+    },
+    [
+      tileImage(tile),
+      ...Object.entries(tile.claimOptions).map(([location, type]) => {
+        return make(
+          'div',
+          {
+            class: `claim ${location} ${type}`
+          }
+        );
+      }),
+    ],
   );
 }

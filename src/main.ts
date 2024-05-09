@@ -1,4 +1,4 @@
-import { ccrcCity, fcfcCity, startingTile } from '~parts/tiles/base.ts';
+import * as tiles from '~parts/tiles/base.ts';
 
 import './style.css';
 
@@ -8,23 +8,17 @@ import { createPlayer, PlayerColor } from '~models/player.ts';
 
 import { renderBoard } from '~view/board.ts';
 
-function start() {
-  const app = document.getElementById('app');
-
-  if (!app) {
-    return;
-  }
-
+function makeBoard() {
   const player = createPlayer({ color: PlayerColor.RED });
 
   const start = createBoardTile(
-    startingTile,
+    tiles.startingTile,
     TileOrientation.S,
   );
 
-  const below = createBoardTile(fcfcCity, TileOrientation.W);
-  const above = createBoardTile(fcfcCity);
-  const left = createBoardTile(ccrcCity, TileOrientation.W);
+  const below = createBoardTile(tiles.fcfcCity, TileOrientation.W);
+  const above = createBoardTile(tiles.fcfcCity);
+  const left = createBoardTile(tiles.ccrcCity, TileOrientation.W);
 
   const board: Board = {
     ['0:0']: {
@@ -41,7 +35,17 @@ function start() {
     },
   };
 
-  app.appendChild(renderBoard(board));
+  return renderBoard(board);
+}
+
+function start() {
+  const app = document.getElementById('app');
+
+  if (!app) {
+    return;
+  }
+
+  app.appendChild(makeBoard());
 }
 
 start();
