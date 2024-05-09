@@ -5,7 +5,14 @@ import {
   getTilePlacementFromBoard,
   placeTile,
 } from './board.ts';
-import { createBoardTile, createTile, TileEdge, TileOrientation } from './tile.ts';
+import {
+  ClaimLocation, ClaimType,
+  createBoardTile,
+  createTile,
+  TileEdge,
+  TileMiddle,
+  TileOrientation,
+} from './tile.ts';
 import { createPlayer, PlayerColor } from '~models/player.ts';
 
 const startingTile = createBoardTile(
@@ -180,9 +187,15 @@ describe('placeTile', () => {
 
   it('should be able to claim tile', () => {
     const player = createPlayer({ color: PlayerColor.RED });
-    const claimed = { player, type: TileEdge.ROAD, orientation: TileOrientation.UP };
+    const claimed = { player, location: ClaimLocation.N };
     const turnedTile = createBoardTile(
-      createTile([TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY]),
+      createTile(
+        [TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY],
+        TileMiddle.FIELD,
+        {
+          [ClaimLocation.N]: ClaimType.ROAD,
+        },
+      ),
       TileOrientation.LEFT,
     );
 
@@ -191,5 +204,24 @@ describe('placeTile', () => {
         ['0:0']: { tile: startingTile },
         ['1:0']: { tile: turnedTile, claimed },
       });
+  });
+
+  it('should not be able to claim tile when there is no location to be claimed', () => {
+    const player = createPlayer({ color: PlayerColor.RED });
+    const claimed = { player, location: ClaimLocation.N };
+    const turnedTile = createBoardTile(
+      createTile(
+        [TileEdge.ROAD, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY],
+        TileMiddle.FIELD,
+        {
+          [ClaimLocation.S]: ClaimType.ROAD,
+        },
+      ),
+      TileOrientation.LEFT,
+    );
+
+    expect(() => {
+      placeTile(standardBoard, turnedTile, [1, 0], claimed);
+    }).toThrow(Error);
   });
 });

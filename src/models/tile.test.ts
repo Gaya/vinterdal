@@ -1,4 +1,6 @@
 import {
+  ClaimLocation,
+  ClaimType,
   createBoardTile,
   createTile,
   getBoardTileEdge,
@@ -13,15 +15,17 @@ describe('createTile', () => {
       .toEqual({
         edges: [TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY],
         middle: TileMiddle.FIELD,
+        claimOptions: {},
         hasBonus: false,
       });
   });
 
   it('creates a new city filled tile with bonus', () => {
-    expect(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY], TileMiddle.FIELD, { bonus: true }))
+    expect(createTile([TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY], TileMiddle.FIELD, {}, { bonus: true }))
       .toEqual({
         edges: [TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY],
         middle: TileMiddle.FIELD,
+        claimOptions: {},
         hasBonus: true,
       });
   });
@@ -31,6 +35,29 @@ describe('createTile', () => {
       .toEqual({
         edges: [TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD, TileEdge.FIELD],
         middle: TileMiddle.FARM,
+        claimOptions: {},
+        hasBonus: false,
+      });
+  });
+
+  it('creates a tile with farm and road', () => {
+    const tile = createTile(
+      [TileEdge.FIELD, TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD],
+      TileMiddle.FARM,
+      {
+        [ClaimLocation.C]: ClaimType.FARM,
+        [ClaimLocation.S]: ClaimType.ROAD,
+      },
+    );
+
+    expect(tile)
+      .toEqual({
+        edges: [TileEdge.FIELD, TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD],
+        middle: TileMiddle.FARM,
+        claimOptions: {
+          [ClaimLocation.C]: ClaimType.FARM,
+          [ClaimLocation.S]: ClaimType.ROAD,
+        },
         hasBonus: false,
       });
   });

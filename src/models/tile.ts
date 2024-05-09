@@ -10,8 +10,30 @@ export enum TileMiddle {
   FIELD = 'FIELD',
 }
 
+export enum ClaimType {
+  CITY = 'CITY',
+  FARM = 'FARM',
+  FIELD = 'FIELD',
+  ROAD = 'ROAD',
+}
+
+export enum ClaimLocation {
+  C = 'C',
+  N = 'N',
+  NE = 'NE',
+  E = 'E',
+  SE = 'SE',
+  S = 'S',
+  SW = 'SW',
+  W = 'W',
+  NW = 'NW',
+}
+
+type ClaimOptions = Partial<Record<ClaimLocation, ClaimType>>;
+
 export interface Tile {
   edges: [TileEdge, TileEdge, TileEdge, TileEdge];
+  claimOptions: ClaimOptions;
   middle: TileMiddle,
   hasBonus?: boolean;
 }
@@ -31,11 +53,15 @@ export interface BoardTile {
 export function createTile(
   edges: Tile['edges'],
   middle: TileMiddle = TileMiddle.FIELD,
-  extraProperties: Partial<{ bonus: boolean; cloister: boolean; }> = {},
+  claimOptions: ClaimOptions = {},
+  extraProperties: Partial<{
+    bonus: boolean;
+  }> = {},
 ): Tile {
   return {
     edges,
     middle,
+    claimOptions,
     hasBonus: !!extraProperties.bonus,
   };
 }

@@ -2,7 +2,7 @@ import { ccrcCity, fcfcCity, startingTile } from '~parts/tiles/base.ts';
 
 import './style.css';
 
-import { createBoardTile, TileEdge, TileOrientation } from '~models/tile.ts';
+import { createBoardTile, TileOrientation } from '~models/tile.ts';
 import { Board } from '~models/board.ts';
 import { createPlayer, PlayerColor } from '~models/player.ts';
 
@@ -32,27 +32,12 @@ function start() {
     },
     ['-1:0']: {
       tile: left,
-      claimed: {
-        player,
-        type: TileEdge.ROAD,
-        orientation: TileOrientation.DOWN,
-      },
     },
     ['0:1']: {
       tile: below,
-      claimed: {
-        player,
-        type: TileEdge.CITY,
-        orientation: TileOrientation.RIGHT,
-      },
     },
     ['0:-1']: {
       tile: above,
-      claimed: {
-        player,
-        type: TileEdge.FIELD,
-        orientation: TileOrientation.UP,
-      },
     },
   };
 

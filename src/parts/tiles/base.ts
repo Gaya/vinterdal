@@ -1,24 +1,47 @@
-import { createTile, createTiles, TileEdge, TileMiddle } from '~models/tile.ts';
+import {
+  ClaimLocation,
+  ClaimType,
+  createTile,
+  createTiles,
+  TileEdge,
+  TileMiddle,
+} from '~models/tile.ts';
 
 export const ffffFarm = createTile(
   [TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD, TileEdge.FIELD],
   TileMiddle.FARM,
+  {
+    [ClaimLocation.C]: ClaimType.FARM,
+    [ClaimLocation.N]: ClaimType.FIELD,
+  }
 );
 
 export const ffrfFarm = createTile(
   [TileEdge.FIELD, TileEdge.FIELD, TileEdge.ROAD, TileEdge.FIELD],
   TileMiddle.FARM,
+  {
+    [ClaimLocation.C]: ClaimType.FARM,
+    [ClaimLocation.N]: ClaimType.FIELD,
+    [ClaimLocation.S]: ClaimType.ROAD,
+  }
 );
 
 export const ccccCityBonus = createTile(
   [TileEdge.CITY, TileEdge.CITY, TileEdge.CITY, TileEdge.CITY],
   TileMiddle.CITY,
+  {
+    [ClaimLocation.C]: ClaimType.CITY,
+  },
   { bonus: true },
 );
 
 export const ccfcCity = createTile(
   [TileEdge.CITY, TileEdge.CITY, TileEdge.FIELD, TileEdge.CITY],
   TileMiddle.CITY,
+  {
+    [ClaimLocation.N]: ClaimType.CITY,
+    [ClaimLocation.S]: ClaimType.FIELD,
+  },
 );
 
 export const ccfcCityBonus = createTile(
