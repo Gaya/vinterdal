@@ -1,4 +1,5 @@
 import { Board } from '~models/board.ts';
+import { locationByOrientation } from '~models/tile.ts';
 import { playerColor } from '~models/player.ts';
 
 import { tileImage } from './tile.ts';
@@ -10,14 +11,16 @@ function claimed(boardPlacement: Board[0]) {
   }
 
   const color = playerColor(boardPlacement.claimed.player);
-
-  console.log(boardPlacement);
+  const location = locationByOrientation(
+    boardPlacement.claimed.location,
+    boardPlacement.boardTile.orientation,
+  );
 
   return make(
     'svg',
     {
       viewBox: '0 0 100 100',
-      class: 'claim',
+      class: `claim ${location}`,
     },
     [
       make(

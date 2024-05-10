@@ -90,6 +90,24 @@ export function offsetByOrientation(orientation: TileOrientation) {
   }
 }
 
+export function locationByOrientation(
+  location: ClaimLocation,
+  orientation: TileOrientation,
+): ClaimLocation {
+  if (location === ClaimLocation.C) {
+    return ClaimLocation.C;
+  }
+
+  const locations = [
+    ClaimLocation.NW, ClaimLocation.N, ClaimLocation.NE,
+    ClaimLocation.E, ClaimLocation.SE,
+    ClaimLocation.S, ClaimLocation.SW, ClaimLocation.W,
+  ];
+  const offset = offsetByOrientation(orientation);
+
+  return locations[(locations.indexOf(location) + (offset * 2)) % 8];
+}
+
 export function getBoardTileEdge(tile: BoardTile, tileSide: TileOrientation): TileEdge {
   const tileOffset = offsetByOrientation(tileSide);
   const orientationOffset = offsetByOrientation(tile.orientation);

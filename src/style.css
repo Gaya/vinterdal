@@ -44,29 +44,79 @@
   background: deeppink;
 }
 
-.tile-example .claim.N,
-.tile-example .claim.NE,
-.tile-example .claim.NW {
-  top: 10%;
+.claim.C {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.tile-example .claim.NE,
-.tile-example .claim.E,
-.tile-example .claim.SE {
-  right: 10%;
+.claim.N,
+.claim.NE,
+.claim.NW {
+  top: 0;
+}
+
+.claim.NE,
+.claim.E,
+.claim.SE {
+  right: 0;
   left: auto;
 }
 
-.tile-example .claim.SE,
-.tile-example .claim.S,
-.tile-example .claim.SW {
-  top: 90%;
+.claim.SE,
+.claim.S,
+.claim.SW {
+  bottom: 0;
 }
 
-.tile-example .claim.NW,
-.tile-example .claim.W,
-.tile-example .claim.SW {
-  left: 10%;
+.claim.NW,
+.claim.W,
+.claim.SW {
+  left: 0;
+}
+
+.claim.E,
+.claim.W {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.claim.N,
+.claim.S {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.claim.NW {
+  transform: translate(-25%, -50%);
+}
+
+.claim.N {
+  transform: translate(-50%, -50%);
+}
+
+.claim.NE {
+  transform: translate(25%, -50%);
+}
+
+.claim.E {
+  transform: translate(25%, -50%);
+}
+
+.claim.SE {
+  transform: translate(25%, 0);
+}
+
+.claim.S {
+  transform: translate(-50%, 0);
+}
+
+.claim.SW {
+  transform: translate(-25%, 0);
+}
+
+.claim.W {
+  transform: translate(-25%, -50%);
 }
 
 svg {
@@ -89,9 +139,7 @@ svg {
   position: absolute;
   z-index: 2;
   width: calc(var(--tile-size) * (1/2));
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  height: calc(var(--tile-size) * (1/2));
 }
 
 .board .tile-image {

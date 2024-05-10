@@ -4,6 +4,7 @@ import {
   createBoardTile,
   createTile,
   getBoardTileEdge,
+  locationByOrientation,
   TileEdge,
   TileMiddle,
   TileOrientation,
@@ -120,5 +121,23 @@ describe('getBoardTileEdge', () => {
     expect(getBoardTileEdge(boardTile, TileOrientation.E)).toEqual(TileEdge.FIELD);
     expect(getBoardTileEdge(boardTile, TileOrientation.S)).toEqual(TileEdge.ROAD);
     expect(getBoardTileEdge(boardTile, TileOrientation.W)).toEqual(TileEdge.CITY);
+  });
+});
+
+describe('locationByOrientation', () => {
+  it('should not change the location when the orientation is N', () => {
+    expect(locationByOrientation(ClaimLocation.N, TileOrientation.N)).toEqual(ClaimLocation.N);
+  });
+
+  it('should change the location from N to E when the orientation is E', () => {
+    expect(locationByOrientation(ClaimLocation.N, TileOrientation.E)).toEqual(ClaimLocation.E);
+  });
+
+  it('should change the location from S to E when the orientation is W', () => {
+    expect(locationByOrientation(ClaimLocation.S, TileOrientation.W)).toEqual(ClaimLocation.E);
+  });
+
+  it('should change the location from NW to NE when the orientation is E', () => {
+    expect(locationByOrientation(ClaimLocation.NW, TileOrientation.E)).toEqual(ClaimLocation.NE);
   });
 });
