@@ -11,6 +11,8 @@ function claimed(boardPlacement: Board[0]) {
 
   const color = playerColor(boardPlacement.claimed.player);
 
+  console.log(boardPlacement);
+
   return make(
     'svg',
     {
@@ -65,7 +67,7 @@ export function renderBoard(board: Board) {
     { class: 'board' },
     Object.entries(board).map(([key, boardPlacement]) => {
       const [x, y] = key.split(':').map((i) => parseInt(i, 10));
-      const { tile, orientation } = boardPlacement.tile;
+      const { tile, orientation } = boardPlacement.boardTile;
 
       return make(
         'div',

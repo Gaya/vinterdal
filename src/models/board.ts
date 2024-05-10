@@ -8,7 +8,7 @@ interface BoardTileClaim {
 
 interface BoardPlacement {
   claimed?: BoardTileClaim;
-  tile: BoardTile;
+  boardTile: BoardTile;
 }
 
 type BoardPosition = [number, number];
@@ -69,7 +69,7 @@ export function canPlaceTile(board: Board, tile: BoardTile, position: BoardPosit
       const comparingTilePlacement = getTilePlacementFromBoard(board, [x + dx, y + dy]);
 
       if (comparingTilePlacement) {
-        return canConnectTiles(tile, comparingTilePlacement.tile, orientation);
+        return canConnectTiles(tile, comparingTilePlacement.boardTile, orientation);
       }
 
       return true;
@@ -78,20 +78,20 @@ export function canPlaceTile(board: Board, tile: BoardTile, position: BoardPosit
 
 export function placeTile(
   currentBoard: Board,
-  tile: BoardTile,
+  boardTile: BoardTile,
   position: BoardPosition,
   claimed?: BoardTileClaim,
 ): Board {
-  if (!canPlaceTile(currentBoard, tile, position)) {
+  if (!canPlaceTile(currentBoard, boardTile, position)) {
     throw new Error('Tile cannot be placed.');
   }
 
-  if (claimed && !tile.tile.claimOptions[claimed.location]) {
+  if (claimed && !boardTile.tile.claimOptions[claimed.location]) {
     throw new Error('Tile cannot be claimed.');
   }
 
   return {
     ...currentBoard,
-    [position.join(':')]: { tile, claimed },
+    [position.join(':')]: { boardTile, claimed },
   };
 }

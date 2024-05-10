@@ -2,7 +2,7 @@ import * as tiles from '~parts/tiles/base.ts';
 
 import './style.css';
 
-import { createBoardTile, TileOrientation } from '~models/tile.ts';
+import { ClaimLocation, createBoardTile, TileOrientation } from '~models/tile.ts';
 import { Board } from '~models/board.ts';
 import { createPlayer, PlayerColor } from '~models/player.ts';
 
@@ -22,16 +22,28 @@ function makeBoard() {
 
   const board: Board = {
     ['0:0']: {
-      tile: start,
+      boardTile: start,
     },
     ['-1:0']: {
-      tile: left,
+      boardTile: left,
+      claimed: {
+        player,
+        location: ClaimLocation.S,
+      },
     },
     ['0:1']: {
-      tile: below,
+      boardTile: below,
+      claimed: {
+        player,
+        location: ClaimLocation.C,
+      },
     },
     ['0:-1']: {
-      tile: above,
+      boardTile: above,
+      claimed: {
+        player,
+        location: ClaimLocation.N,
+      },
     },
   };
 

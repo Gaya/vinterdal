@@ -22,13 +22,13 @@ const startingTile = createBoardTile(
 
 const standardBoard: Board = {
   ['0:0']: {
-    tile: startingTile,
+    boardTile: startingTile,
   },
 };
 
 describe('getTilePlacementFromBoard', () => {
   it('should be able to get the starting tile from the starting board', () => {
-    expect(getTilePlacementFromBoard(standardBoard, [0, 0])).toStrictEqual({ tile: startingTile });
+    expect(getTilePlacementFromBoard(standardBoard, [0, 0])).toStrictEqual({ boardTile: startingTile });
   });
 
   it('should get nothing from an empty place on the starting board', () => {
@@ -38,11 +38,11 @@ describe('getTilePlacementFromBoard', () => {
   it('should be able to get a tile from a coordinate', () => {
     const otherBoard: Board = {
       ['23:45']: {
-        tile: startingTile,
+        boardTile: startingTile,
       },
     };
 
-    expect(getTilePlacementFromBoard(otherBoard, [23, 45])).toStrictEqual({ tile: startingTile });
+    expect(getTilePlacementFromBoard(otherBoard, [23, 45])).toStrictEqual({ boardTile: startingTile });
   });
 });
 
@@ -127,16 +127,16 @@ describe('canPlaceTile', () => {
 
     const complexBoard: Board = {
       ['0:0']: {
-        tile: startingTile,
+        boardTile: startingTile,
       },
       ['1:-1']: {
-        tile: rightTile,
+        boardTile: rightTile,
       },
       ['0:-2']: {
-        tile: belowTile,
+        boardTile: belowTile,
       },
       ['-1:-1']: {
-        tile: startingTile,
+        boardTile: startingTile,
       },
     };
 
@@ -158,8 +158,8 @@ describe('placeTile', () => {
 
     expect(placeTile(standardBoard, turnedTile, [1, 0]))
       .toEqual({
-        ['0:0']: { tile: startingTile },
-        ['1:0']: { tile: turnedTile },
+        ['0:0']: { boardTile: startingTile },
+        ['1:0']: { boardTile: turnedTile },
       });
   });
 
@@ -201,8 +201,8 @@ describe('placeTile', () => {
 
     expect(placeTile(standardBoard, turnedTile, [1, 0], claimed))
       .toEqual({
-        ['0:0']: { tile: startingTile },
-        ['1:0']: { tile: turnedTile, claimed },
+        ['0:0']: { boardTile: startingTile },
+        ['1:0']: { boardTile: turnedTile, claimed },
       });
   });
 
